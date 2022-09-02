@@ -25,7 +25,10 @@ export default async function handler(req, res) {
     "Opera/9.80 (J2ME/MIDP; Opera Mini/5.1.21214/28.2725; U; ru) Presto/2.8.119 Version/11.10"
   );
   await page.goto(url);
-  const pdf = await page.pdf({ format: "a4" });
-  return pdf;
+  //const pdf = await page.pdf({ format: "a4" });
+  //return pdf;
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify({ status: "OK" }));
+  return;
 }
-
