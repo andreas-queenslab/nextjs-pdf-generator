@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer-core");
-const cheerio = require("cheerio");
 const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
@@ -29,3 +28,4 @@ export default async function handler(req, res) {
   const pdf = await page.pdf({ format: "a4" });
   return pdf;
 }
+
