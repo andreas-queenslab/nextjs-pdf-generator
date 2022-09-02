@@ -1,4 +1,3 @@
-const puppeteer = require("puppeteer-core");
 const chrome = require("chrome-aws-lambda");
 
 export default async function handler(req, res) {
@@ -10,7 +9,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const browser = await puppeteer.launch(
+  const browser = await chrome.puppeteer.launch(
     process.env.NODE_ENV === "production"
       ? {
           args: chrome.args,
