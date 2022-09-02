@@ -1,4 +1,4 @@
-const playwright = require("playwright");
+const { chromium } = require("playwright");
 
 export default async function handler(req, res) {
   const url = req?.query?.url;
@@ -9,7 +9,15 @@ export default async function handler(req, res) {
     return;
   }
 
-  const browser = await playwright.chromium.launch();
+  const browser = await chromium.launch(
+    process.env.NODE_ENV === "production"
+      ? {
+          args: chrome.args,
+          executablePath: await chrome.executablePath,
+          headless: chrome.headless,
+        }
+      : {}
+  );
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto("https://www.google.com/search?q=Google");
